@@ -56,8 +56,8 @@
         const REDIRECT_URI = "https://jaytwenty4k.github.io/VODRJL/"; 
 
         function loginWithDiscord() {
-            const authUrl = `https://discord.com/api/oauth2/authorize?client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&response_type=token&scope=identify`;
-            window.location.href = authUrl;
+    const authUrl = `https://discord.com/api/oauth2/authorize?client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&response_type=token&scope=identify`;
+    window.location.href = authUrl;
         }
 
         function getUserData(accessToken) {
