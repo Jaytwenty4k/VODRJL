@@ -19,6 +19,9 @@ function getUserData(accessToken) {
     .then(user => {
         document.getElementById("username").textContent = user.username;
         document.getElementById("avatar").src = `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`;
+        // Zeige das Dashboard und verstecke die Login-Box
+        document.getElementById("login-box").style.display = "none";
+        document.getElementById("dashboard-content").style.display = "block";
     })
     .catch(error => console.error("Fehler beim Abrufen der Nutzerdaten:", error));
 }
