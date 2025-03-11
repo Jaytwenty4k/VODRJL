@@ -3,104 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DanoneCraft - Discord Login</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background-color: #f4f4f4;
-            padding: 50px;
-        }
-        .container {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            display: inline-block;
-        }
-        button {
-            background-color: #5865F2;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-        button:hover {
-            background-color: #4752C4;
-        }
-        #user-info {
-            margin-top: 20px;
-            display: none;
-        }
-        img {
-            border-radius: 50%;
-            margin-top: 10px;
-        }
-    </style>
+    <title>DanoneCraft</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+    <!-- Obere Leiste -->
     <header>
-    <nav>
         <div class="logo">DanoneCraft</div>
-        <div class="user-info">
+        <div class="user-section">
             <span id="username">Gast</span>
             <img id="avatar" src="https://cdn.discordapp.com/embed/avatars/0.png" alt="Avatar">
+            <button class="menu-btn" onclick="toggleMenu()">☰</button>
         </div>
-        <button class="menu-btn" onclick="toggleMenu()">☰</button>
-    </nav>
-</header>
+    </header>
 
-<div class="sidebar" id="sidebar">
-    <button class="close-btn" onclick="toggleMenu()">×</button>
-    <a href="index.html">Home</a>
-    <a href="about.html">Über uns</a>
-    <a href="contact.html">Kontakt</a>
-</div>
-    
-<div class="container">
-    <h1>Willkommen bei DanoneCraft</h1>
-    <p>Bitte melde dich mit Discord an:</p>
-    <button onclick="loginWithDiscord()">Mit Discord anmelden</button>
-    <div id="user-info">
-        <h2>Hallo, <span id="username"></span>!</h2>
-          <img id="avatar" src="" width="100" height="100" alt="Avatar">
-     </div>
-</div>
+    <!-- Seitenmenü -->
+    <div class="sidebar" id="sidebar">
+        <button class="close-btn" onclick="toggleMenu()">×</button>
+        <a href="#">Home</a>
+        <a href="#">Über uns</a>
+        <a href="#">Kontakt</a>
+    </div>
 
-    <script>
-        const CLIENT_ID = "1345009931509563443"; 
-        const REDIRECT_URI = "https://jaytwenty4k.github.io/DanoneCraft/"; 
+    <!-- Hauptinhalt -->
+    <main>
+        <div class="login-box">
+            <h1>Willkommen bei DanoneCraft</h1>
+            <p>Bitte melde dich mit Discord an:</p>
+            <button class="discord-btn" onclick="loginWithDiscord()">Mit Discord anmelden</button>
+        </div>
+    </main>
 
-        function loginWithDiscord() {
-    const authUrl = `https://discord.com/oauth2/authorize?client_id=1345009931509563443&response_type=code&redirect_uri=https%3A%2F%2Fjaytwenty4k.github.io%2FDanoneCraft%2F&scope=identify`;
-    window.location.href = authUrl;
-        }
-
-        function getUserData(accessToken) {
-            fetch("https://discord.com/api/users/@me", {
-                headers: { "Authorization": `Bearer ${accessToken}` }
-            })
-            .then(response => response.json())
-            .then(user => {
-                document.getElementById("username").textContent = user.username;
-                document.getElementById("avatar").src = `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`;
-                document.getElementById("user-info").style.display = "block";
-            })
-            .catch(error => console.error("Fehler beim Abrufen der Nutzerdaten:", error));
-        }
-
-        function checkForToken() {
-            const hash = window.location.hash;
-            if (hash.includes("access_token")) {
-                const params = new URLSearchParams(hash.substring(1));
-                const accessToken = params.get("access_token");
-                getUserData(accessToken);
-            }
-        }
-
-        window.onload = checkForToken;
-    </script>
-<script src="script.js"></script></body>
+    <script src="script.js"></script>
+</body>
 </html>
