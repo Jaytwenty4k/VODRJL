@@ -1,0 +1,92 @@
+/* Allgemeine Stile */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+/* Navigation oben */
+header {
+    background: #5865F2; /* Discord-Farbe */
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Navigation: Flexbox für Logo & User-Info */
+nav {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+/* Logo-Stil */
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* Benutzer-Info (Name + Avatar) */
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Avatar-Bild */
+.user-info img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+/* Menü-Button (☰) */
+.menu-btn {
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: white;
+    cursor: pointer;
+    margin-left: auto;
+}
+
+/* Seitenmenü (ausfahrbar) */
+.sidebar {
+    position: fixed;
+    top: 0;
+    right: -250px; /* Startposition (versteckt) */
+    width: 250px;
+    height: 100%;
+    background: #333;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    transition: right 0.3s ease-in-out; /* Animation */
+}
+
+/* Menü-Links */
+.sidebar a {
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+    display: block;
+}
+
+/* Hover-Effekt für Links */
+.sidebar a:hover {
+    background: #444;
+}
+
+/* Schließen-Button (×) */
+.close-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    text-align: right;
+    cursor: pointer;
+}
