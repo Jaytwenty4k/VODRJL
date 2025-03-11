@@ -6,58 +6,82 @@ body {
     background-color: #f4f4f4;
 }
 
-/* Navigation oben */
+/* Header (obere Leiste) */
 header {
-    background: #5865F2; /* Discord-Farbe */
+    background: #5865F2;
     color: white;
     padding: 10px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
-
-/* Navigation: Flexbox für Logo & User-Info */
-nav {
-    display: flex;
-    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
+    height: 50px; /* Ca. 2 cm */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
 }
 
-/* Logo-Stil */
-.logo {
-    font-size: 24px;
-    font-weight: bold;
-}
-
-/* Benutzer-Info (Name + Avatar) */
-.user-info {
+/* Discord Profil & Menü-Button */
+.user-section {
     display: flex;
     align-items: center;
     gap: 10px;
 }
 
-/* Avatar-Bild */
-.user-info img {
+.user-section img {
     width: 40px;
     height: 40px;
     border-radius: 50%;
 }
 
-/* Menü-Button (☰) */
 .menu-btn {
     background: none;
     border: none;
     font-size: 24px;
     color: white;
     cursor: pointer;
-    margin-left: auto;
 }
 
-/* Seitenmenü (ausfahrbar) */
+/* Hauptinhalt */
+main {
+    margin-top: 80px; /* Abstand für den fixen Header */
+    text-align: center;
+    padding: 20px;
+}
+
+/* Discord-Login Box */
+.login-box {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    display: inline-block;
+    margin-top: 50px;
+}
+
+/* Discord-Button */
+.discord-btn {
+    background: #5865F2;
+    color: white;
+    padding: 10px 15px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.discord-btn:hover {
+    background: #4752c4;
+}
+
+/* Sidebar (Menü) */
 .sidebar {
     position: fixed;
     top: 0;
-    right: -250px; /* Startposition (versteckt) */
+    right: -250px;
     width: 250px;
     height: 100%;
     background: #333;
@@ -65,10 +89,10 @@ nav {
     display: flex;
     flex-direction: column;
     padding: 20px;
-    transition: right 0.3s ease-in-out; /* Animation */
+    transition: right 0.3s ease-in-out;
+    z-index: 1001;
 }
 
-/* Menü-Links */
 .sidebar a {
     color: white;
     text-decoration: none;
@@ -76,12 +100,10 @@ nav {
     display: block;
 }
 
-/* Hover-Effekt für Links */
 .sidebar a:hover {
     background: #444;
 }
 
-/* Schließen-Button (×) */
 .close-btn {
     background: none;
     border: none;
