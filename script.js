@@ -4,6 +4,7 @@ const REDIRECT_URI = "https://jaytwenty4k.github.io/DanoneCraft/";
 document.addEventListener("DOMContentLoaded", () => {
     checkForToken();
     setupEventListeners();
+    loadUserDataFromLocalStorage();
 });
 
 function loginWithDiscord() {
@@ -17,8 +18,14 @@ function getUserData(accessToken) {
     })
     .then(response => response.json())
     .then(user => {
+        // Speichern der Benutzerdaten im localStorage
+        localStorage.setItem("username", user.username);
+        localStorage.setItem("avatar", `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`);
+
+        // Anzeigen der Benutzerdaten im Header
         document.getElementById("username").textContent = user.username;
         document.getElementById("avatar").src = `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`;
+
         // Zeige das Dashboard und verstecke die Login-Box
         document.getElementById("login-box").style.display = "none";
         document.getElementById("dashboard-content").style.display = "block";
@@ -35,12 +42,29 @@ function checkForToken() {
     }
 }
 
+function loadUserDataFromLocalStorage() {
+    // Überprüfen, ob Benutzerdaten im localStorage vorhanden sind
+    const username = localStorage.getItem("username");
+    const avatar = localStorage.getItem("avatar");
+
+    if (username && avatar) {
+        document.getElementById("username").textContent = username;
+        document.getElementById("avatar").src = avatar;
+        
+        // Dashboard und Login-Box entsprechend umschalten
+        document.getElementById("login-box").style.display = "none";
+        document.getElementById("dashboard-content").style.display = "block";
+    }
+}
+
 function toggleMenu() {
     const sidebar = document.getElementById("sidebar");
-    if (sidebar.style.left === "0px") {
-        sidebar.style.left = "-250px";
+    const isOpen = sidebar.style.left === "0px";
+
+    if (isOpen) {
+        sidebar.style.left = "-250px"; // Menü einklappen
     } else {
-        sidebar.style.left = "0px";
+        sidebar.style.left = "0px"; // Menü ausklappen
     }
 }
 
