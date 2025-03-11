@@ -17,13 +17,8 @@ function getUserData(accessToken) {
     })
     .then(response => response.json())
     .then(user => {
-        const usernameElement = document.getElementById("username");
-        const avatarElement = document.getElementById("avatar");
-
-        if (usernameElement && avatarElement) {
-            usernameElement.textContent = user.username;
-            avatarElement.src = `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`;
-        }
+        document.getElementById("username").textContent = user.username;
+        document.getElementById("avatar").src = `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`;
     })
     .catch(error => console.error("Fehler beim Abrufen der Nutzerdaten:", error));
 }
@@ -39,9 +34,7 @@ function checkForToken() {
 
 function toggleMenu() {
     const sidebar = document.getElementById("sidebar");
-    if (sidebar) {
-        sidebar.style.right = sidebar.style.right === "0px" ? "-250px" : "0px";
-    }
+    sidebar.style.right = sidebar.style.right === "0px" ? "-250px" : "0px";
 }
 
 function setupEventListeners() {
