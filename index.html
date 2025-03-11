@@ -41,15 +41,33 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Willkommen bei DanoneCraft</h1>
-        <p>Bitte melde dich mit Discord an:</p>
-        <button onclick="loginWithDiscord()">Mit Discord anmelden</button>
-        <div id="user-info">
-            <h2>Hallo, <span id="username"></span>!</h2>
-            <img id="avatar" src="" width="100" height="100" alt="Avatar">
+    <header>
+    <nav>
+        <div class="logo">DanoneCraft</div>
+        <div class="user-info">
+            <span id="username">Gast</span>
+            <img id="avatar" src="https://cdn.discordapp.com/embed/avatars/0.png" alt="Avatar">
         </div>
-    </div>
+        <button class="menu-btn" onclick="toggleMenu()">☰</button>
+    </nav>
+</header>
+
+<div class="sidebar" id="sidebar">
+    <button class="close-btn" onclick="toggleMenu()">×</button>
+    <a href="index.html">Home</a>
+    <a href="about.html">Über uns</a>
+    <a href="contact.html">Kontakt</a>
+</div>
+    
+<div class="container">
+    <h1>Willkommen bei DanoneCraft</h1>
+    <p>Bitte melde dich mit Discord an:</p>
+    <button onclick="loginWithDiscord()">Mit Discord anmelden</button>
+    <div id="user-info">
+        <h2>Hallo, <span id="username"></span>!</h2>
+          <img id="avatar" src="" width="100" height="100" alt="Avatar">
+     </div>
+</div>
 
     <script>
         const CLIENT_ID = "1345009931509563443"; 
