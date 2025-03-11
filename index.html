@@ -3,34 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meine GitHub Page</title>
+    <title>DanoneCraft - Discord Login</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             text-align: center;
-            padding: 50px;
             background-color: #f4f4f4;
-        }
-        h1 {
-            color: #333;
-        }
-        p {
-            font-size: 18px;
+            padding: 50px;
         }
         .container {
-            background: dark-gray;
+            background: white;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             display: inline-block;
         }
+        button {
+            background-color: #5865F2;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #4752C4;
+        }
+        #user-info {
+            margin-top: 20px;
+            display: none;
+        }
+        img {
+            border-radius: 50%;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Willkommen auf meiner Website!</h1>
-        <p>Diese Seite wurde für DanoneCraft erstellt.</p>
-        <p>Hier werden zukünftige Events, Projekte, Server Ressourcen und mehr zufinden sein!</p>
+        <h1>Willkommen bei DanoneCraft</h1>
+        <p>Bitte melde dich mit Discord an:</p>
+        <button onclick="loginWithDiscord()">Mit Discord anmelden</button>
+        <div id="user-info">
+            <h2>Hallo, <span id="username"></span>!</h2>
+            <img id="avatar" src="" width="100" height="100" alt="Avatar">
+        </div>
     </div>
+
+    <script>
+        const CLIENT_ID = "1349028909710311544"; 
+        const REDIRECT_URI = "https://jaytwenty4k.github.io/VODRJL/"; 
+
+        function loginWithDiscord() {
+            const authUrl = `https://discord.com/api/oauth2/authorize?client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&response_type=token&scope=identify`;
+            window.location.href = authUrl;
+        }
+
+        function getUserData(accessToken) {
+            fetch("https://discord.com/api/users/@me", {
+                headers: { "Authorization": `Bearer ${accessToken}` }
+            })
+            .then(response => response.json())
+            .then(user => {
+                document.getElementById("username").textContent = user.username;
+                document.getElementById("avatar").src = `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`;
+                document.getElementById("user-info").style.display = "block";
+            })
+            .catch(error => console.error("Fehler beim Abrufen der Nutzerdaten:", error));
+        }
+
+        function checkForToken() {
+            const hash = window.location.hash;
+            if (hash.includes("access_token")) {
+                const params = new URLSearchParams(hash.substring(1));
+                const accessToken = params.get("access_token");
+                getUserData(accessToken);
+            }
+        }
+
+        window.onload = checkForToken;
+    </script>
 </body>
 </html>
