@@ -3,54 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>DanoneCraft</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-    <!-- Header (obere Leiste) -->
+    <!-- Navigation -->
     <header>
-        <div class="logo">DanoneCraft</div>
-        <div class="user-section">
-            <span id="username">Gast</span>
+        <div class="user-info">
             <img id="avatar" src="https://cdn.discordapp.com/embed/avatars/0.png" alt="Avatar">
-            <button class="menu-btn" onclick="toggleMenu()">☰</button>
+            <span id="username">Gast</span>
         </div>
+        <button id="menu-btn" class="menu-btn">☰</button>
     </header>
 
-    <!-- Seitenmenü (Sidebar) -->
-    <div class="sidebar" id="sidebar">
-        <button class="close-btn" onclick="toggleMenu()">×</button>
-        <nav>
-            <a href="#">Home</a>
-            <a href="#">Über uns</a>
-            <a href="#">Kontakt</a>
-            <a href="#">Einstellungen</a>
-        </nav>
+    <!-- Seitenleiste -->
+    <div id="sidebar" class="sidebar">
+        <button id="close-btn" class="close-btn">×</button>
+        <a href="#">Home</a>
+        <a href="#">Über uns</a>
+        <a href="#">Kontakt</a>
     </div>
 
-    <!-- Hauptinhalt -->
-    <main id="main-content">
-        <!-- Login Box -->
-        <div class="login-box" id="login-box">
-            <h1>Willkommen bei DanoneCraft</h1>
-            <p>Bitte melde dich mit Discord an:</p>
-            <button class="discord-btn" onclick="loginWithDiscord()">Mit Discord anmelden</button>
-        </div>
-
-        <!-- Dashboard (wird nur nach Login angezeigt) -->
-        <div class="dashboard-content" id="dashboard-content" style="display: none;">
-            <h2>Willkommen im Dashboard</h2>
-            <p>Hier kannst du dein Modpack und deine Einstellungen verwalten.</p>
-        </div>
-    </main>
-
-    <!-- Navigation (unterer Bereich) -->
-    <footer class="bottom-nav">
-        <a href="#">Startseite</a>
-        <a href="#">Dashboard</a>
-        <a href="#">Einstellungen</a>
-    </footer>
+    <!-- Hauptbereich -->
+    <div class="container">
+        <h1>Willkommen bei DanoneCraft</h1>
+        <p>Bitte melde dich mit Discord an:</p>
+        <button onclick="loginWithDiscord()" class="discord-btn">Mit Discord anmelden</button>
+    </div>
 
     <script src="script.js"></script>
 </body>
