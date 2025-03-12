@@ -1,38 +1,32 @@
-const CLIENT_ID = "1345009931509563443"; 
+const CLIENT_ID = "1345009931509563443";
 const REDIRECT_URI = "https://jaytwenty4k.github.io/DanoneCraft/";
 
-document.addEventListener("DOMContentLoaded", () => {
-    checkForToken();
-    setupEventListeners();
-    loadUserDataFromLocalStorage();
-});
-
+// Discord Login URL erstellen
 function loginWithDiscord() {
     const authUrl = `https://discord.com/api/oauth2/authorize?client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&response_type=token&scope=identify`;
     window.location.href = authUrl;
 }
 
+// Discord-Nutzerdaten holen
 function getUserData(accessToken) {
     fetch("https://discord.com/api/users/@me", {
         headers: { "Authorization": `Bearer ${accessToken}` }
     })
     .then(response => response.json())
     .then(user => {
-        // Speichern der Benutzerdaten im localStorage
-        localStorage.setItem("username", user.username);
-        localStorage.setItem("avatar", `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`);
+        // Anzeigename und Avatar aktualisieren
+        const username = user.global_name || user.username;
+        const avatarUrl = `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`;
 
-        // Anzeigen der Benutzerdaten im Header
-        document.getElementById("username").textContent = user.username;
-        document.getElementById("avatar").src = `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`;
-
-        // Zeige das Dashboard und verstecke die Login-Box
-        document.getElementById("login-box").style.display = "none";
-        document.getElementById("dashboard-content").style.display = "block";
+        document.getElementById("username").textContent = username;
+        document.getElementById("username-large").textContent = username;
+        document.getElementById("avatar").src = avatarUrl;
+        document.getElementById("avatar-large").src = avatarUrl;
     })
     .catch(error => console.error("Fehler beim Abrufen der Nutzerdaten:", error));
 }
 
+// Token prüfen und Userdaten holen
 function checkForToken() {
     const hash = window.location.hash;
     if (hash.includes("access_token")) {
@@ -42,36 +36,12 @@ function checkForToken() {
     }
 }
 
-function loadUserDataFromLocalStorage() {
-    // Überprüfen, ob Benutzerdaten im localStorage vorhanden sind
-    const username = localStorage.getItem("username");
-    const avatar = localStorage.getItem("avatar");
+// Menü ein- und ausblenden
+const sidebar = document.getElementById("sidebar");
+const menuBtn = document.getElementById("menu-btn");
+const closeBtn = document.getElementById("close-btn");
 
-    if (username && avatar) {
-        document.getElementById("username").textContent = username;
-        document.getElementById("avatar").src = avatar;
-        
-        // Dashboard und Login-Box entsprechend umschalten
-        document.getElementById("login-box").style.display = "none";
-        document.getElementById("dashboard-content").style.display = "block";
-    }
-}
+menuBtn.onclick = () => sidebar.style.left = "0";
+closeBtn.onclick = () => sidebar.style.left = "-250px";
 
-function toggleMenu() {
-    const sidebar = document.getElementById("sidebar");
-    const isOpen = sidebar.style.left === "0px";
-
-    if (isOpen) {
-        sidebar.style.left = "-250px"; // Menü einklappen
-    } else {
-        sidebar.style.left = "0px"; // Menü ausklappen
-    }
-}
-
-function setupEventListeners() {
-    const menuButton = document.querySelector(".menu-btn");
-    const closeButton = document.querySelector(".close-btn");
-
-    if (menuButton) menuButton.addEventListener("click", toggleMenu);
-    if (closeButton) closeButton.addEventListener("click", toggleMenu);
-}
+window.onload = checkForToken;
